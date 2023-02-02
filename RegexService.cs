@@ -22,19 +22,17 @@ namespace SvgPathExtractor
         /// <returns>Match group value of <c>d</c> tag.</returns>
         public string GetSvgPath(string input)
         {
-            var result = pattern.Match(input);
-            return result.Groups[1].Value;
+            return pattern.Match(input).Groups[1].Value;
         }
 
         /// <summary>
-        /// Matches the regex to extract the <c>path</c> element.
+        /// Matches the regex to extract the <c>path</c> element. Does not support multipath vectors.
         /// </summary>
         /// <param name="input"></param>
         /// <returns>Match value element <c>path</c></returns>
-        public string GetPathElementAsString(string input)
+        public string GetPathElementAsString(string @input)
         {
-            var result = pattern.Match(input);
-            return result.Value;
+            return pattern.Match(input).Groups[0].Value;
         }
     }
 }
