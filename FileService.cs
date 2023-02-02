@@ -11,10 +11,10 @@ namespace SvgPathExtractor
 {
     public class FileService
     {
-        public string folderPath { get; set; }
-        public string outputPath { get; set; }
-        public string[] files { get; private set; }
-        public List<FileOutput> regexResults { get; set; }
+        public string FolderPath { get; set; }
+        public string OutputPath { get; set; } = string.Empty;
+        private string[] files { get;  set; }
+        private List<FileOutput> regexResults { get; set; }
         public FileService(string folderInput, string folderOutput)
         { 
             folderPath = folderInput;
@@ -55,7 +55,7 @@ namespace SvgPathExtractor
             };
             foreach (var item in regexResults)
             {
-                await using FileStream createStream = File.Create($"{outputPath}\\{item.Name}.json");
+                await using FileStream createStream = File.Create($"{OutputPath}\\{item.Name}.json");
                 await JsonSerializer.SerializeAsync(createStream, item, options);
             }
         }
