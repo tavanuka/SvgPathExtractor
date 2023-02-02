@@ -31,7 +31,8 @@ while (string.IsNullOrWhiteSpace(folderOutputPath));
 FileService fileService = new(folderInputPath, folderOutputPath);
 fileService.ReadAllFiles();
 await fileService.WriteOutputToJson();
-Console.WriteLine("operation done.");
+Console.Write("\noperation done. Press any key to continue...");
+Console.ReadLine();
 
 
 
