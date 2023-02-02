@@ -23,6 +23,11 @@ namespace SvgPathExtractor
             regexResults = new List<FileOutput>();
         }
 
+        public void CreateNewDirectory()
+        {
+           OutputPath = Directory.CreateDirectory($"{FolderPath}\\output").FullName;
+        }
+
         public void ReadAllFiles()
         {
             RegexService regex = new RegexService();
