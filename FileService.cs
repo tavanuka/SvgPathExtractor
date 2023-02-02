@@ -15,11 +15,11 @@ namespace SvgPathExtractor
         public string OutputPath { get; set; } = string.Empty;
         private string[] files { get;  set; }
         private List<FileOutput> regexResults { get; set; }
-        public FileService(string folderInput, string folderOutput)
-        { 
-            folderPath = folderInput;
-            outputPath = folderOutput;
-            files = Directory.GetFiles(folderPath, "*.svg");
+
+        public FileService()
+        {
+            FolderPath = Directory.GetCurrentDirectory();
+            files = Directory.GetFiles(FolderPath, "*.svg");
             regexResults = new List<FileOutput>();
         }
 
@@ -41,7 +41,6 @@ namespace SvgPathExtractor
                 {
                     name = Path.GetFileNameWithoutExtension(files[id]);
 
-                    name = Path.GetFileNameWithoutExtension(files[id]);
                     Console.WriteLine($"File {name}.svg exists. reading...");
 
                     fileContent = File.ReadAllText(files[id]);
