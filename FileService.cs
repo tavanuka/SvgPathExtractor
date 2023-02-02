@@ -39,6 +39,7 @@ namespace SvgPathExtractor
             {
                 if (File.Exists(files[id]))
                 {
+                    name = Path.GetFileNameWithoutExtension(files[id]);
 
                     name = Path.GetFileNameWithoutExtension(files[id]);
                     Console.WriteLine($"File {name}.svg exists. reading...");
