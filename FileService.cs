@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -47,10 +48,15 @@ namespace SvgPathExtractor
 
         public async Task WriteOutputToJson()
         {
-            foreach(var item in regexResults)
+            var options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                WriteIndented = true
+            };
+            foreach (var item in regexResults)
             {
                 await using FileStream createStream = File.Create($"{outputPath}\\{item.Name}.json");
-                await JsonSerializer.SerializeAsync(createStream, item);
+                await JsonSerializer.SerializeAsync(createStream, item, options);
             }
         }
 
