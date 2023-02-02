@@ -12,7 +12,7 @@ namespace SvgPathExtractor
         private readonly Regex pattern;
         public RegexService()
         {
-            pattern = new Regex(@"[<path]*\sd=(?:[""'])([\s\S]*?)(?:[""']\S*)|(?:[""']/>)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            pattern = new Regex(@"[<path]*\sd=(?:[""'])([\s\S]*?)(?:[""']>(?:<.path>))|[<path]*\sd=(?:[""'])([\s\S]*?)(?:[""']/>)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
         }
 
         /// <summary>
