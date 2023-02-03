@@ -44,6 +44,7 @@ Console.ReadKey(true);
 void ReadFilesFromAnotherPath(FileService fileService)
 {
     Console.Clear();
+    bool isValid = false;
     do
     {
         Console.WriteLine("Please enter the folder file path:");
@@ -52,8 +53,10 @@ void ReadFilesFromAnotherPath(FileService fileService)
         {
             Console.WriteLine("Incorrect input. please try again!\n");
         }
+        else
+            isValid = true;
     }
-    while (string.IsNullOrWhiteSpace(fileService.FolderPath));
+    while (!isValid);
     fileService.ReadAllFiles();
 }
 
@@ -65,6 +68,7 @@ void ReadFilesFromCurrentPath(FileService fileService)
 
 void OutputFilesToAnotherPath()
 {
+    bool isValid = false;
     Console.Clear();
     do
     {
@@ -75,8 +79,10 @@ void OutputFilesToAnotherPath()
         {
             Console.WriteLine("Incorrect input. please try again!\n");
         }
+        else
+            isValid = true;
     }
-    while (string.IsNullOrWhiteSpace(fileService.OutputPath));
+    while (!isValid);
 }
 
 async Task WriteFilesToAnotherPath(FileService fileService)

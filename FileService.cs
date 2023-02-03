@@ -25,7 +25,8 @@ namespace SvgPathExtractor
 
         public void CreateNewDirectory()
         {
-           OutputPath = Directory.CreateDirectory($"{FolderPath}\\output").FullName;
+            string localPath = Directory.GetCurrentDirectory();
+            OutputPath = Directory.CreateDirectory($"{localPath}\\output").FullName;
         }
 
         public void ReadAllFiles()
