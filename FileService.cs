@@ -32,21 +32,17 @@ namespace SvgPathExtractor
         {
             Files = Directory.GetFiles(FolderPath, "*.svg");
             RegexService regex = new RegexService();
-            string path;
-            string fullPath;
-            string name;
-            string fileContent;
             for (int id = 0; id < Files.Length; id++ )
             {
                 if (File.Exists(Files[id]))
                 {
-                    name = Path.GetFileNameWithoutExtension(Files[id]);
+                    string name = Path.GetFileNameWithoutExtension(Files[id]);
 
                     Console.WriteLine($"File {name}.svg exists. reading...");
 
-                    fileContent = File.ReadAllText(Files[id]);
-                    path = regex.GetSvgPath(fileContent);
-                    fullPath = regex.GetPathElementAsString(fileContent);
+                    string fileContent = File.ReadAllText(Files[id]);
+                    string path = regex.GetSvgPath(fileContent);
+                    string fullPath = regex.GetPathElementAsString(fileContent);
                     RegexResults.Add(new FileOutput { ID = id + 1, Path = path, FullPath = fullPath, Name = name });
                 }
             }
