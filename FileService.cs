@@ -19,7 +19,6 @@ namespace SvgPathExtractor
         public FileService()
         {
             FolderPath = Directory.GetCurrentDirectory();
-            files = Directory.GetFiles(FolderPath, "*.svg");
             regexResults = new List<FileOutput>();
         }
 
@@ -31,6 +30,7 @@ namespace SvgPathExtractor
 
         public void ReadAllFiles()
         {
+            files = Directory.GetFiles(FolderPath, "*.svg");
             RegexService regex = new RegexService();
             string path;
             string fullPath;
