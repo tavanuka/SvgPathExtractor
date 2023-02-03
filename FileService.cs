@@ -13,13 +13,13 @@ namespace SvgPathExtractor
     {
         public string FolderPath { get; set; }
         public string OutputPath { get; set; } = string.Empty;
-        private string[] files { get;  set; }
-        private List<FileOutput> regexResults { get; set; }
+        private string[]? Files { get; set; }
+        private List<FileOutput> RegexResults { get; set; }
 
         public FileService()
         {
             FolderPath = Directory.GetCurrentDirectory();
-            regexResults = new List<FileOutput>();
+            RegexResults = new List<FileOutput>();
         }
 
         public void CreateNewDirectory()
@@ -30,24 +30,24 @@ namespace SvgPathExtractor
 
         public void ReadAllFiles()
         {
-            files = Directory.GetFiles(FolderPath, "*.svg");
+            Files = Directory.GetFiles(FolderPath, "*.svg");
             RegexService regex = new RegexService();
             string path;
             string fullPath;
             string name;
             string fileContent;
-            for (int id = 0; id < files.Length; id++ )
+            for (int id = 0; id < Files.Length; id++ )
             {
-                if (File.Exists(files[id]))
+                if (File.Exists(Files[id]))
                 {
-                    name = Path.GetFileNameWithoutExtension(files[id]);
+                    name = Path.GetFileNameWithoutExtension(Files[id]);
 
                     Console.WriteLine($"File {name}.svg exists. reading...");
 
-                    fileContent = File.ReadAllText(files[id]);
+                    fileContent = File.ReadAllText(Files[id]);
                     path = regex.GetSvgPath(fileContent);
                     fullPath = regex.GetPathElementAsString(fileContent);
-                    regexResults.Add(new FileOutput { ID = id + 1, Path = path, FullPath = fullPath, Name = name });
+                    RegexResults.Add(new FileOutput { ID = id + 1, Path = path, FullPath = fullPath, Name = name });
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace SvgPathExtractor
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 WriteIndented = true
             };
-            foreach (var item in regexResults)
+            foreach (var item in RegexResults)
             {
                 await using FileStream createStream = File.Create($"{OutputPath}\\{item.Name}.json");
                 await JsonSerializer.SerializeAsync(createStream, item, options);
